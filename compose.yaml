@@ -30,6 +30,7 @@ services:
     restart: always
     environment:
       PMA_HOST: db
+      UPLOAD_LIMIT: 128M
     ports:
       - ${EXPOSE_PMA}:80
     depends_on:
@@ -64,8 +65,7 @@ services:
 
   fastapi:
     profiles:
-      - dev
-      - prod
+      - wip
     build: ./fastapi
     restart: always
     command: uvicorn main:app --reload --workers 1 --host 0.0.0.0 --port 8004
