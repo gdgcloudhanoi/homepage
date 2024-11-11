@@ -45,7 +45,7 @@ jobs:
       
       - name: Create .env
         env:
-          DOTENV: ${{ vars.DOTENV }}
+          DOTENV: ${{ secrets.DOTENV }}
         run: |
           echo "$DOTENV" > .env
 
@@ -54,6 +54,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
+          target: app
           push: ${{ github.event_name != 'pull_request' }}
           tags: asia-southeast1-docker.pkg.dev/devfest-438523/sownt/devfest_web:latest
           cache-from: type=gha
