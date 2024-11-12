@@ -124,7 +124,7 @@ func Login(c *gin.Context) {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{})
 		return
 	}
-	c.SetCookie("session", session, int(UserSessionExpiresIn.Seconds()), "/", os.Getenv("NEXT_PUBLIC_BASE_URL"), false, false)
+	c.SetCookie("session", session, int(UserSessionExpiresIn.Seconds()), "/", os.Getenv("BASE_URL"), false, false)
 	c.JSON(http.StatusOK, gin.H{})
 }
 
@@ -134,7 +134,7 @@ func Logout(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{})
 	}
-	c.SetCookie("session", "", -1, "/", os.Getenv("NEXT_PUBLIC_BASE_URL"), false, false)
+	c.SetCookie("session", "", -1, "/", os.Getenv("BASE_URL"), false, false)
 }
 
 func CreateTicket(c *gin.Context) {
