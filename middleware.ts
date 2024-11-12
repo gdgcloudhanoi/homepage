@@ -19,7 +19,7 @@ export async function middleware(request: NextRequest) {
             return NextResponse.redirect(redirectUrl)
         }
         const url = request.nextUrl.clone();
-        url.pathname = '/';
+        url.pathname = '/admin/dashboard';
         return NextResponse.redirect(url);
     }
 
