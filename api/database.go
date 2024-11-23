@@ -45,7 +45,7 @@ func SetupPostgres() *gorm.DB {
 }
 
 func InitDb() {
-	err := GetDb().AutoMigrate(&Attendee{}, &Email{}, &EmailTemplate{}, &User{}, &Event{}, &Ticket{}, &Credential{}, &Log{})
+	err := GetDb().AutoMigrate(&Attendee{}, &Email{}, &EmailTemplate{}, &User{}, &Event{}, &Ticket{})
 	if err != nil {
 		panic("failed to migrate database")
 	}
