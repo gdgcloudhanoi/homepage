@@ -18,7 +18,6 @@ type Attendee struct {
 	CompanyEmail string `gorm:"nullable"`
 	LinkedIn     string `gorm:"nullable"`
 	Question     string `gorm:"nullable"`
-	Secret       string `gorm:"not null;unique"`
 }
 
 type Email struct {
@@ -47,12 +46,16 @@ type User struct {
 	FirebaseUid string `gorm:"unique"`
 	Status      bool   `gorm:"not null;default:false"`
 	Email       string `gorm:"not null;unique"`
+	Name        string `gorm:"not null"`
+	Avatar      string `gorm:"not null"`
 }
 
 type Event struct {
 	gorm.Model
 	Name        string `gorm:"not null"`
-	Description string `gorm:"not null"`
+	Description string `gorm:"nullable"`
+	StartTime   string `gorm:"nullable"`
+	EndTime     string `gorm:"nullable"`
 }
 
 type Ticket struct {
@@ -63,17 +66,4 @@ type Ticket struct {
 	Event      Event     `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
 	Used       time.Time `gorm:"nullable"`
 	Secret     string    `gorm:"not null;unique" json:"secret"`
-}
-
-type Credential struct {
-	gorm.Model
-	Key string `gorm:"not null;unique"`
-}
-
-type Log struct {
-	gorm.Model
-	Type        string `gorm:"not null"`
-	Target      string `gorm:"not null"`
-	Description string `gorm:"not null"`
-	Author      string `gorm:"not null"`
 }
