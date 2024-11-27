@@ -149,7 +149,7 @@ func GetTicket(c *gin.Context) {
 	GetDb().Where("secret = ?", id).First(&ticket)
 	if ticket.ID == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"message": "Ticket not found.",
+			"message": "Không tìm thấy vé.",
 		})
 		return
 	}
@@ -158,15 +158,24 @@ func GetTicket(c *gin.Context) {
 	if attendee.ID == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{})
 	}
+	var event Event
+	GetDb().First(&event, "id = ?", ticket.EventID)
+	if event.ID == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{})
+	}
+
 	c.JSON(http.StatusOK, gin.H{
-		"name":         attendee.Name,
-		"email":        attendee.Email,
-		"birthday":     attendee.Birthday,
-		"experience":   attendee.Experience,
-		"jobTitle":     attendee.JobTitle,
-		"companyEmail": attendee.CompanyEmail,
-		"linkedIn":     attendee.LinkedIn,
-		"used":         ticket.Used,
+		"name":          attendee.Name,
+		"email":         attendee.Email,
+		"birthday":      attendee.Birthday,
+		"experience":    attendee.Experience,
+		"job_title":     attendee.JobTitle,
+		"company_email": attendee.CompanyEmail,
+		"linked_in":     attendee.LinkedIn,
+		"used":          ticket.Used.Valid,
+		"checked_in":    ticket.Used.Time,
+		"event_name":    event.Name,
+		"event_id":      event.ID,
 	})
 }
 
@@ -180,19 +189,41 @@ func CheckInEvent(c *gin.Context) {
 	GetDb().Where("secret = ?", id).First(&ticket)
 	if ticket.ID == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"message": "Ticket not found.",
+			"message": "Không tìm thấy vé.",
 		})
 		return
 	}
-	if !ticket.Used.IsZero() {
+	if ticket.Used.Valid {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"message": "Already checked in.",
+			"message": "Vé đã được sử dụng.",
 		})
 		return
 	}
-	ticket.Used = time.Now()
+	var event Event
+	GetDb().First(&event, "id = ?", ticket.EventID)
+	if event.ID == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Không tìm thấy sự kiện.",
+		})
+		return
+	}
+	current := time.Now()
+	if event.StartTime.Valid && current.Before(event.StartTime.Time) {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Sự kiện chưa bắt đầu.",
+		})
+		return
+	}
+	if event.EndTime.Valid && current.After(event.EndTime.Time) {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Sự kiện đã kết thúc.",
+		})
+		return
+	}
+	ticket.Used.Time = time.Now()
+	ticket.Used.Valid = true
 	GetDb().Save(&ticket)
 	c.JSON(http.StatusOK, gin.H{
-		"message": "Check-in successfully.",
+		"message": "Check In thành công.",
 	})
 }

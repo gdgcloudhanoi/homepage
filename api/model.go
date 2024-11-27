@@ -1,8 +1,8 @@
 package main
 
 import (
+	"database/sql"
 	"gorm.io/gorm"
-	"time"
 )
 
 type Attendee struct {
@@ -52,18 +52,18 @@ type User struct {
 
 type Event struct {
 	gorm.Model
-	Name        string `gorm:"not null"`
-	Description string `gorm:"nullable"`
-	StartTime   string `gorm:"nullable"`
-	EndTime     string `gorm:"nullable"`
+	Name        string       `gorm:"not null"`
+	Description string       `gorm:"nullable"`
+	StartTime   sql.NullTime `gorm:"nullable"`
+	EndTime     sql.NullTime `gorm:"nullable"`
 }
 
 type Ticket struct {
 	gorm.Model
-	AttendeeID int
+	AttendeeID uint
 	Attendee   Attendee `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
-	EventID    int
-	Event      Event     `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
-	Used       time.Time `gorm:"nullable"`
-	Secret     string    `gorm:"not null;unique" json:"secret"`
+	EventID    uint
+	Event      Event        `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
+	Used       sql.NullTime `gorm:"nullable"`
+	Secret     string       `gorm:"not null;unique" json:"secret"`
 }
