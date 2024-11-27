@@ -1,10 +1,22 @@
-name: Build API Docker Image
+name: Build Go App
 
 on:
-  push:
-    branches: ["main"]
+  pull_request:
+    branches:
+      - main
     paths:
-      - 'api/'
+      - 'api/**'
+      - '.github/workflows/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'api/**'
+      - '.github/workflows/**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
