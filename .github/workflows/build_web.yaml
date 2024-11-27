@@ -1,11 +1,24 @@
-name: Build Web Docker Image
+name: Build Next App
 
 on:
-  push:
-    branches: ["main"]
+  pull_request:
+    branches:
+      - main
     paths-ignore:
-      - 'api/'
-      - 'admin_api/'
+      - 'api/**'
+      - 'fastapi/**'
+      - 'scripts/**'
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'api/**'
+      - 'fastapi/**'
+      - 'scripts/**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
