@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 import createNextIntlPlugin from 'next-intl/plugin';
-const withNextIntl = createNextIntlPlugin();
+const withNextIntl = createNextIntlPlugin('./app/events/devfest-cloud-2024/i18n/request.ts');
 const nextConfig = {
     output: 'export',
     webpack(config) {

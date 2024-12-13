@@ -1,7 +1,7 @@
 /** @type {import('postcss-load-config').Config} */
 const config = {
   plugins: {
-    tailwindcss: {},
+    tailwindcss: { config: './app/events/devfest-cloud-2024/tailwind.config.ts' },
   },
 };
 
