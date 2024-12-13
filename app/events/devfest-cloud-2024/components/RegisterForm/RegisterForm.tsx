@@ -15,15 +15,15 @@ import { InfoCircleOutlined } from "@ant-design/icons";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
-import { useEmailAvailability } from "@/hooks/useEmailAvailability";
-import { useRegistration } from "@/hooks/useRegister";
+import { useEmailAvailability } from "@/app/events/devfest-cloud-2024/hooks/useEmailAvailability";
+import { useRegistration } from "@/app/events/devfest-cloud-2024/hooks/useRegister";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import {
   registerFormDefault,
   RegisterFormFields,
   registerFormSchema,
-} from "@/types/forms";
+} from "@/app/events/devfest-cloud-2024/types/forms";
 
 const { Item } = Form;
 const { TextArea } = Input;

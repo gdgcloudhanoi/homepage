@@ -7,14 +7,14 @@ function getBasePath(request: NextRequest) {
 }
 
 export async function middleware(request: NextRequest) {
-  const isAdminRoute = request.nextUrl.pathname.startsWith("/check-in");
-  const isLoginRoute = request.nextUrl.pathname === "/login";
+  const isAdminRoute = request.nextUrl.pathname.startsWith("/events/devfest-cloud-2024/check-in");
+  const isLoginRoute = request.nextUrl.pathname === "/events/devfest-cloud-2024/login";
   const sessionCookie = request.cookies.get("session")?.value;
 
   if (!sessionCookie) {
     if (isAdminRoute) {
       const url = request.nextUrl.clone();
-      url.pathname = "/login";
+      url.pathname = "/events/devfest-cloud-2024/login";
       url.searchParams.set(
         "redirect",
         getBasePath(request) + request.nextUrl.pathname
@@ -28,7 +28,7 @@ export async function middleware(request: NextRequest) {
       if (redirectUrl) {
         return NextResponse.redirect(redirectUrl);
       }
-      url.pathname = "/";
+      url.pathname = "/events/devfest-cloud-2024";
       return NextResponse.redirect(url);
     }
 
@@ -42,12 +42,12 @@ export async function middleware(request: NextRequest) {
       );
       if (res.status !== 200) {
         const url = request.nextUrl.clone();
-        url.pathname = "/unauthorized";
+        url.pathname = "/events/devfest-cloud-2024/unauthorized";
         return NextResponse.redirect(url);
       }
     }
 
-    if (request.nextUrl.pathname === "/unauthorized") {
+    if (request.nextUrl.pathname === "/events/devfest-cloud-2024/unauthorized") {
       const res = await axios.get(
         `${process.env.NEXT_PUBLIC_API_ENDPOINT}/admin/ping`,
         {
@@ -57,7 +57,7 @@ export async function middleware(request: NextRequest) {
       );
       if (res.status === 200) {
         const url = request.nextUrl.clone();
-        url.pathname = "/check-in";
+        url.pathname = "/events/devfest-cloud-2024/check-in";
         return NextResponse.redirect(url);
       }
     }
@@ -67,5 +67,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/login", "/check-in", "/unauthorized"],
+  matcher: ["/events/devfest-cloud-2024/login", "/events/devfest-cloud-2024/check-in", "/events/devfest-cloud-2024/unauthorized"],
 };

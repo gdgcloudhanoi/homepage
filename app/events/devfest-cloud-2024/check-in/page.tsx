@@ -1,10 +1,10 @@
 "use client";
-import { centerText } from "@/misc/tracker";
+import { centerText } from "@/app/events/devfest-cloud-2024/misc/tracker";
 import { Scanner } from "@yudiel/react-qr-scanner";
 import { Modal, notification, Spin } from "antd";
 import axios from "axios";
 import { useState } from "react";
-import logo from "@/public/logos/logo_colorful.png";
+import logo from "@/public/devfest-cloud-2024/logos/logo_colorful.png";
 import Image from "next/image";
 import { Button, Input, Space } from "antd";
 const { Compact } = Space;

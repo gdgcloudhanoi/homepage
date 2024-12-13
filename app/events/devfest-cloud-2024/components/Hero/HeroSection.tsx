@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ReactElement } from "react";
 import Image from "next/image";
-import banner from "@/public/banner/banner.svg?url";
-import bannerMobile from "@/public/banner/banner_mobile.svg?url";
+import banner from "@/public/devfest-cloud-2024/banner/banner.svg?url";
+import bannerMobile from "@/public/devfest-cloud-2024/banner/banner_mobile.svg?url";
 
 interface HeroSectionProps {
   children?: ReactElement;
