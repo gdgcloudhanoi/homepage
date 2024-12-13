@@ -81,7 +81,7 @@ const MapBlock: React.FC<MapBlockProps> = ({ location, googleMapApiKey }) => {
                                 lng: location.pointer.longitude,
                             }}
                             title={location.name}
-                            icon={{ url: "/icons/marker.svg", scaledSize: new window.google.maps.Size(36, 36), }}
+                            icon={{ url: "/devfest-cloud-2024/icons/marker.svg", scaledSize: new window.google.maps.Size(36, 36), }}
                         />
                     </GoogleMap>
                 )}

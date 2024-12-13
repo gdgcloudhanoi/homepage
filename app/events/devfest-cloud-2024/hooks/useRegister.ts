@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RegisterFormFields } from "@/types/forms";
+import { RegisterFormFields } from "@/app/events/devfest-cloud-2024/types/forms";
 import axios from "axios";
 
 export const useRegistration = () => {
