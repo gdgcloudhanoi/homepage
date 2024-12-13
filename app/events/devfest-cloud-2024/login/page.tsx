@@ -1,5 +1,5 @@
 "use client";
-import useFirebase from "@/hooks/useFirebase";
+import useFirebase from "@/app/events/devfest-cloud-2024/hooks/useFirebase";
 import axios from "axios";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useRouter } from "next/navigation";
@@ -28,7 +28,7 @@ export default function LoginPage() {
           { withCredentials: true }
         );
         if (res.status === 200) {
-          router.push("/check-in");
+          router.push("/events/devfest-cloud-2024/check-in");
         }
       }
     } finally {
@@ -46,7 +46,7 @@ export default function LoginPage() {
           ) : (
             <Image
               unoptimized
-              src={"/icons/google-icon.svg"}
+              src={"/devfest-cloud-2024/icons/google-icon.svg"}
               alt="Google Icon"
               width={0}
               height={0}

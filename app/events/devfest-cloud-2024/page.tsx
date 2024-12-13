@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import HeroSection from "@/components/Hero/HeroSection";
-import StickyHeader from "@/components/Header/StickyHeader";
+import HeroSection from "@/app/events/devfest-cloud-2024/components/Hero/HeroSection";
+import StickyHeader from "@/app/events/devfest-cloud-2024/components/Header/StickyHeader";
 import {
   FaFacebook,
   FaXTwitter,
@@ -9,18 +9,18 @@ import {
   FaLinkedinIn,
   FaYoutube,
 } from "react-icons/fa6";
-import Footer from "@/components/Footer/Footer";
-import Gallery from "@/components/Gallery/Gallery";
-import logo from "@/public/logos/logo_colorful.png";
+import Footer from "@/app/events/devfest-cloud-2024/components/Footer/Footer";
+import Gallery from "@/app/events/devfest-cloud-2024/components/Gallery/Gallery";
+import logo from "@/public/devfest-cloud-2024/logos/logo_colorful.png";
 import Image from "next/image";
-import About from "@/components/About/About";
-import MapBlock from "@/components/Map/Map";
-import RandomSVGBackground from "@/components/Background/Background";
-import PersonalCard from "@/components/PersonalCard/PersonalCard";
+import About from "@/app/events/devfest-cloud-2024/components/About/About";
+import MapBlock from "@/app/events/devfest-cloud-2024/components/Map/Map";
+import RandomSVGBackground from "@/app/events/devfest-cloud-2024/components/Background/Background";
+import PersonalCard from "@/app/events/devfest-cloud-2024/components/PersonalCard/PersonalCard";
 import { ConfigProvider, theme } from "antd";
 import { useTranslations } from "next-intl";
-import SpeakerCard from "@/components/PersonalCard/SpeakerCard";
-import RegisterForm from "@/components/RegisterForm/RegisterForm";
+import SpeakerCard from "@/app/events/devfest-cloud-2024/components/PersonalCard/SpeakerCard";
+import RegisterForm from "@/app/events/devfest-cloud-2024/components/RegisterForm/RegisterForm";
 
 export default function Home() {
   const t = useTranslations();
@@ -84,15 +84,15 @@ export default function Home() {
   ];
 
   const photoGallery = [
-    { url: "/gallery/1.jpg" },
-    { url: "/gallery/10.jpg" },
-    { url: "/gallery/12.jpg" },
-    { url: "/gallery/4.jpg" },
-    { url: "/gallery/5.jpg" },
-    { url: "/gallery/9.jpg" },
-    { url: "/gallery/3.jpg" },
-    { url: "/gallery/11.jpg" },
-    { url: "/gallery/7.jpg" },
+    { url: "/devfest-cloud-2024/gallery/1.jpg" },
+    { url: "/devfest-cloud-2024/gallery/10.jpg" },
+    { url: "/devfest-cloud-2024/gallery/12.jpg" },
+    { url: "/devfest-cloud-2024/gallery/4.jpg" },
+    { url: "/devfest-cloud-2024/gallery/5.jpg" },
+    { url: "/devfest-cloud-2024/gallery/9.jpg" },
+    { url: "/devfest-cloud-2024/gallery/3.jpg" },
+    { url: "/devfest-cloud-2024/gallery/11.jpg" },
+    { url: "/devfest-cloud-2024/gallery/7.jpg" },
   ];
 
   const aboutData = [
@@ -106,87 +106,87 @@ export default function Home() {
     {
       name: "Nhi Nguyễn",
       title: "Community Manager\n@ Google Developer Relations SEA",
-      avatar: "/speakers/nhi_nguyen.png",
+      avatar: "/devfest-cloud-2024/speakers/nhi_nguyen.png",
     },
     {
       name: "Võ Tự Đức",
       title: "CEO @ 2VO\nGoogle Developer Expert @ Google Workspace",
-      avatar: "/speakers/vo_tu_duc.png",
+      avatar: "/devfest-cloud-2024/speakers/vo_tu_duc.png",
     },
     {
       name: "Tú Phạm",
       title: "CEO @ AdFlex\nGoogle Developer Expert @ Google Cloud Platform",
-      avatar: "/speakers/tu_pham.png",
+      avatar: "/devfest-cloud-2024/speakers/tu_pham.png",
     },
     {
       name: "Trường Nguyễn",
       title:
         "Founder @ GDG Cloud Hanoi\nGoogle Developer Expert @ Google Cloud Platform",
-      avatar: "/speakers/truong_nguyen.png",
+      avatar: "/devfest-cloud-2024/speakers/truong_nguyen.png",
     },
     {
       name: "Hoan Lê",
       title: "Director of Corporate Customer @ Cloud Ace",
-      avatar: "/speakers/hoan_le.png",
+      avatar: "/devfest-cloud-2024/speakers/hoan_le.png",
     },
     {
       name: "Nguyễn Xuân Hà",
       title: "Data Analytics Specialist Lead @ Google Cloud Vietnam",
-      avatar: "/speakers/nguyen_xuan_ha.png",
+      avatar: "/devfest-cloud-2024/speakers/nguyen_xuan_ha.png",
     },
     {
       name: "Huy Đặng",
       title:
         "Co-Lead @ GDG Cloud Hanoi\nGoogle Developer Expert @ Google Cloud Platform",
-      avatar: "/speakers/huy_dang.png",
+      avatar: "/devfest-cloud-2024/speakers/huy_dang.png",
     },
     {
       name: "Tuấn Vũ",
       title: "Solution Architect @ Cloud AZ",
-      avatar: "/speakers/tuan_vu.png",
+      avatar: "/devfest-cloud-2024/speakers/tuan_vu.png",
     },
     {
       name: "Tăng Trần",
       title: "Cloud Engineer @ BIDV",
-      avatar: "/speakers/tang_tran.png",
+      avatar: "/devfest-cloud-2024/speakers/tang_tran.png",
     },
     {
       name: "Trần Minh Tú",
       title: "Data Scientist AAI-DnA @ Techcombank",
-      avatar: "/speakers/tran_minh_tu.png",
+      avatar: "/devfest-cloud-2024/speakers/tran_minh_tu.png",
     },
     {
       name: "Thái Hồ",
       title: "Solution Consultant Presales @ CMC Telecom",
-      avatar: "/speakers/thai_ho.png",
+      avatar: "/devfest-cloud-2024/speakers/thai_ho.png",
     },
     {
       name: "Violet Đặng",
       title: "Customer Engineer @ Google",
-      avatar: "/speakers/violet_dang.png",
+      avatar: "/devfest-cloud-2024/speakers/violet_dang.png",
     },
     {
       name: "Lê Thị Bích Thuận",
       title: "Udemy Instructor Founder & CEO @ UDECAREER",
-      avatar: "/speakers/le_thi_bich_thuan.png",
+      avatar: "/devfest-cloud-2024/speakers/le_thi_bich_thuan.png",
     },
     {
       name: "Cleo Credo",
       title: "Digital MSME Engineering Lead Google Developer Expert @ Firebase",
-      avatar: "/speakers/cleo.png",
+      avatar: "/devfest-cloud-2024/speakers/cleo.png",
     },
     {
       name: "Vũ Minh Hoàng",
       title:
         "Senior Data Scientist @ Viettel Solutions\nLecturer @ Thang Long University",
-      avatar: "/speakers/vu_minh_hoang.png",
+      avatar: "/devfest-cloud-2024/speakers/vu_minh_hoang.png",
     },
   ];
 
   const teams = [
     {
       name: "Truong Nguyen",
-      avatar: "/teams/truong_nguyen.webp",
+      avatar: "/devfest-cloud-2024/teams/truong_nguyen.webp",
       description: "GDE / Lead",
       socialLinks: [
         "https://www.facebook.com/haitruong.bkhn",
@@ -196,7 +196,7 @@ export default function Home() {
     },
     {
       name: "Huy Dang",
-      avatar: "/teams/huy_dang.webp",
+      avatar: "/devfest-cloud-2024/teams/huy_dang.webp",
       description: "GDE / Co-Lead",
       socialLinks: [
         "https://www.facebook.com/dangduchuy1995",
@@ -206,7 +206,7 @@ export default function Home() {
     },
     {
       name: "Amy Le",
-      avatar: "/teams/amy_le.webp",
+      avatar: "/devfest-cloud-2024/teams/amy_le.webp",
       description: "Partnership Lead",
       socialLinks: [
         "https://www.facebook.com/miu.espresso.1/",
@@ -215,7 +215,7 @@ export default function Home() {
     },
     {
       name: "Minh Pham",
-      avatar: "/teams/minh_pham.webp",
+      avatar: "/devfest-cloud-2024/teams/minh_pham.webp",
       description: "Design Lead",
       socialLinks: [
         "https://www.facebook.com/minhmasi17",
@@ -224,13 +224,13 @@ export default function Home() {
     },
     {
       name: "Minh Quang",
-      avatar: "/teams/nvqm.webp",
+      avatar: "/devfest-cloud-2024/teams/nvqm.webp",
       description: "Team Tech",
       socialLinks: ["https://www.linkedin.com/in/quangminhnv/"],
     },
     {
       name: "Kim Ung",
-      avatar: "/teams/kim_ung.webp",
+      avatar: "/devfest-cloud-2024/teams/kim_ung.webp",
       description: "Partnership & Operation Team",
       socialLinks: [
         "https://www.facebook.com/kistenchan/",
@@ -239,7 +239,7 @@ export default function Home() {
     },
     {
       name: "Son Tran",
-      avatar: "/teams/sownt.webp",
+      avatar: "/devfest-cloud-2024/teams/sownt.webp",
       description: "Tech Lead",
       socialLinks: [
         "https://www.facebook.com/thaison181/",
@@ -249,7 +249,7 @@ export default function Home() {
     },
     {
       name: "My Hoa",
-      avatar: "/teams/ltmh.webp",
+      avatar: "/devfest-cloud-2024/teams/ltmh.webp",
       description: "PR Lead",
       socialLinks: [
         "https://www.facebook.com/huu.ngaan",
@@ -258,19 +258,19 @@ export default function Home() {
     },
     {
       name: "Hà Phạm",
-      avatar: "/teams/ha_pham.webp",
+      avatar: "/devfest-cloud-2024/teams/ha_pham.webp",
       description: "Operation Lead",
       socialLinks: [],
     },
     {
       name: "Luong PH",
-      avatar: "/teams/luong.jpeg",
+      avatar: "/devfest-cloud-2024/teams/luong.jpeg",
       description: "Media Lead",
       socialLinks: ["https://www.linkedin.com/in/luongph151/"],
     },
   ];
 
-  const images = ["/icons/code.svg", "/icons/sharp.svg", "/icons/snow.svg"];
+  const images = ["/devfest-cloud-2024/icons/code.svg", "/devfest-cloud-2024/icons/sharp.svg", "/devfest-cloud-2024/icons/snow.svg"];
 
   return (
     <ConfigProvider
@@ -350,7 +350,7 @@ export default function Home() {
             <div className="w-full">
               <Image
                 unoptimized
-                src={"/agenda.png"}
+                src={"/devfest-cloud-2024/agenda.png"}
                 alt=""
                 width={3840}
                 height={4122}
@@ -358,7 +358,7 @@ export default function Home() {
               />
               <Image
                 unoptimized
-                src={"/agenda_mobile.png"}
+                src={"/devfest-cloud-2024/agenda_mobile.png"}
                 alt=""
                 width={1456}
                 height={8146}

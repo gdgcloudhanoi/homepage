@@ -4,17 +4,17 @@
   "rsc": true,
   "tsx": true,
   "tailwind": {
-    "config": "tailwind.config.ts",
-    "css": "app/globals.css",
+    "config": "app/events/devfest-cloud-2024/tailwind.config.ts",
+    "css": "app/events/devfest-cloud-2024/globals.css",
     "baseColor": "neutral",
     "cssVariables": false,
     "prefix": ""
   },
   "aliases": {
-    "components": "@/components",
-    "utils": "@/lib/utils",
-    "ui": "@/components/ui",
-    "lib": "@/lib",
-    "hooks": "@/hooks"
+    "components": "@/app/events/devfest-cloud-2024/components",
+    "utils": "@/app/events/devfest-cloud-2024/lib/utils",
+    "ui": "@/app/events/devfest-cloud-2024/components/ui",
+    "lib": "@/app/events/devfest-cloud-2024/lib",
+    "hooks": "@/app/events/devfest-cloud-2024/hooks"
   }
 }
