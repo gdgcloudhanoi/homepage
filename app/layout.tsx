@@ -1,0 +1,67 @@
+import type { Metadata } from "next";
+import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
+import { ScrollProvider } from "@/components/ScrollContext";
+import localFont from "next/font/local";
+import AppCheckProvider from "@/components/AppCheckProvider";
+
+const googleSans = localFont({
+  src: [
+    {
+      path: "../public/fonts/GoogleSans-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/GoogleSans-Medium.ttf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/GoogleSans-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/GoogleSans-Italic.ttf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/GoogleSans-MediumItalic.ttf",
+      weight: "500",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/GoogleSans-BoldItalic.ttf",
+      weight: "700",
+      style: "italic",
+    },
+  ],
+  variable: "--font-google-sans",
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  title: "Build with AI Cloud Hanoi 2025",
+  description: "By GDG Cloud Hanoi"
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body className={`${googleSans.variable} antialiased`}>
+        <AppCheckProvider>
+          <ScrollProvider>
+            {children}
+            <Toaster />
+          </ScrollProvider>
+        </AppCheckProvider>
+      </body>
+    </html>
+  );
+}
