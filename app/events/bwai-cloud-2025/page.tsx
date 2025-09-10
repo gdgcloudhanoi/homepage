@@ -1,8 +1,8 @@
-import FAQComponent from "@/components/FAQ";
-import Footer from "@/components/Footer";
-import Gallery from "@/components/Gallery";
-import Header from "@/components/Header";
-import Hero from "@/components/Hero";
+import FAQComponent from "@/app/events/bwai-cloud-2025/components/FAQ";
+import Footer from "@/app/events/bwai-cloud-2025/components/Footer";
+import Gallery from "@/app/events/bwai-cloud-2025/components/Gallery";
+import Header from "@/app/events/bwai-cloud-2025/components/Header";
+import Hero from "@/app/events/bwai-cloud-2025/components/Hero";
 import { getTranslations } from "next-intl/server";
 
 export default async function Home() {
