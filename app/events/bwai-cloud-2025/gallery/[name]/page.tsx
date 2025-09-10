@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import Gallery from "@/components/Gallery";
+import Gallery from "@/app/events/bwai-cloud-2025/components/Gallery";
 
 export async function generateMetadata({
   params,
@@ -11,7 +11,7 @@ export async function generateMetadata({
   const imageUrl = `${process.env.IMAGES_URL}/${name}`;
   const title = `Gallery | Build with AI Cloud Hanoi 2025`;
   const description = `View your images in our gallery.`;
-  const canonicalUrl = `${process.env.NEXT_PUBLIC_SITE_URL}gallery/${name}`;
+  const canonicalUrl = `${process.env.NEXT_PUBLIC_SITE_URL}events/bwai-cloud-2025/gallery/${name}`;
 
   return {
     title,

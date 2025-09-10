@@ -14,7 +14,7 @@ const Footer = () => {
           className="flex justify-center"
         >
           <Image
-            src="/gdg_cloud_hanoi.png"
+            src="/bwai-cloud-2025/gdg_cloud_hanoi.png"
             alt="Logo"
             width={192}
             height={60}

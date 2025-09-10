@@ -19,5 +19,5 @@ const nextConfig: NextConfig = {
   },
 };
 
-const withNextIntl = createNextIntlPlugin();
+const withNextIntl = createNextIntlPlugin("./app/events/bwai-cloud-2025/i18n/request.ts");
 export default withNextIntl(nextConfig);
