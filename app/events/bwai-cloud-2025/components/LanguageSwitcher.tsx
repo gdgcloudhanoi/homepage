@@ -3,13 +3,13 @@
 import * as React from "react";
 import { Globe } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/app/events/bwai-cloud-2025/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/app/events/bwai-cloud-2025/components/ui/dropdown-menu";
 
 export function LanguageSwitcher() {
   const switchLocale = (nextLocale: string) => {

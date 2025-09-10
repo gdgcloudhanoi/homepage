@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/app/events/bwai-cloud-2025/components/ui/button";
 import { useState } from "react";
-import { useScroll } from "@/components/ScrollContext";
+import { useScroll } from "@/app/events/bwai-cloud-2025/components/ScrollContext";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { LanguageSwitcher } from "./LanguageSwitcher";
@@ -12,7 +12,7 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 const Header = ({
   navItems = [
     { id: "home", nameKey: "home", url: "/" },
-    { id: "gallery", nameKey: "gallery", url: "/gallery" },
+    { id: "gallery", nameKey: "gallery", url: "/events/bwai-cloud-2025/gallery" },
   ],
 }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -57,7 +57,7 @@ const Header = ({
           className="flex items-center"
         >
           <Image
-            src="/gdg_cloud_hanoi.png"
+            src="/bwai-cloud-2025/gdg_cloud_hanoi.png"
             alt="Logo"
             width={192}
             height={60}

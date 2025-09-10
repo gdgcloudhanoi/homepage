@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Play, XIcon } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import RecapVideo from "@/components/RecapVideo";
+import RecapVideo from "@/app/events/bwai-cloud-2025/components/RecapVideo";
 import { useTranslations } from "next-intl";
 
 type AnimationStyle =
