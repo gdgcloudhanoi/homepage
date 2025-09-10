@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "firebase/app-check";
-import { app } from "@/lib/firebase";
+import { app } from "@/app/events/bwai-cloud-2025/lib/firebase";
 
 export default function AppCheckProvider({
   children,
