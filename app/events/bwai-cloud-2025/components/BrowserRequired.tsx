@@ -8,8 +8,8 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+} from "@/app/events/bwai-cloud-2025/components/ui/dialog";
+import { Button } from "@/app/events/bwai-cloud-2025/components/ui/button";
 import { useTranslations } from "next-intl";
 
 export const BrowserRequired = ({

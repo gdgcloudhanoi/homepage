@@ -107,7 +107,7 @@ const Hero: React.FC = () => {
             <HeroVideoDialog
               animationStyle="from-center"
               videoSrc="https://www.youtube.com/embed/qh3NGpYRG3I?si=4rb-zSdDkVK9qxxb"
-              thumbnailSrc="/dashboard.png"
+              thumbnailSrc="/bwai-cloud-2025/dashboard.png"
               thumbnailAlt={t("hero.thumbnailAlt")}
               className="border rounded-lg shadow-lg max-w-screen-lg mt-16"
             />

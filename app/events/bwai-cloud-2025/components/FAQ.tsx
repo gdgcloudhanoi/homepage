@@ -4,10 +4,10 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from "@/app/events/bwai-cloud-2025/components/ui/accordion";
 import VideoPlayer from "./Video";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+import { cn } from "@/app/events/bwai-cloud-2025/lib/utils";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
@@ -73,7 +73,7 @@ export default function FAQ() {
                     >
                       <VideoPlayer
                         hlsSrc="https://storage.googleapis.com/gdg-cloud-hanoi/videos/how-to-get-gcp-credit-bwaic-2025/playlist.m3u8"
-                        thumbnailSrc="/preview.jpg"
+                        thumbnailSrc="/bwai-cloud-2025/preview.jpg"
                         thumbnailAlt={t("faqSection.q1.videoAlt")}
                         className="border rounded-lg shadow-lg max-w-screen-lg"
                       />
@@ -128,7 +128,7 @@ export default function FAQ() {
                       >
                         <div className="relative rounded-md p-2 ring-1 ring-slate-200/50 dark:bg-gray-900/70 dark:ring-white/10 backdrop-blur-md">
                           <Image
-                            src="/ai_studio.jpg"
+                            src="/bwai-cloud-2025/ai_studio.jpg"
                             alt={t("faqSection.q2.imageAlt")}
                             className="rounded-lg"
                             width={1280}
@@ -173,7 +173,7 @@ export default function FAQ() {
                       >
                         <div className="relative rounded-md p-2 ring-1 ring-slate-200/50 dark:bg-gray-900/70 dark:ring-white/10 backdrop-blur-md">
                           <Image
-                            src="/notebook.jpg"
+                            src="/bwai-cloud-2025/notebook.jpg"
                             alt={t("faqSection.q3.imageAlt")}
                             className="rounded-lg"
                             width={1280}

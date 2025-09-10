@@ -6,7 +6,7 @@ export async function GET() {
   return new ImageResponse(
     (
       <img
-        src={`${process.env.NEXT_PUBLIC_SITE_URL}/preview.jpg`}
+        src={`${process.env.NEXT_PUBLIC_SITE_URL}/bwai-cloud-2025/preview.jpg`}
         style={{
           position: "relative",
           bottom: -160,
