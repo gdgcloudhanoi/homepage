@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Gallery | Build with AI Cloud Hanoi 2025",
     description: "By GDG Cloud Hanoi",
-    url: `${process.env.NEXT_PUBLIC_SITE_URL}gallery`,
+    url: `${process.env.NEXT_PUBLIC_SITE_URL}events/bwai-cloud-2025/gallery`,
     siteName: "Build with AI Cloud Hanoi 2025",
     type: "website",
     locale: "vi_VN",

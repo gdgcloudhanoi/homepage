@@ -1,19 +1,19 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { firestore } from "@/lib/firebase";
+import { firestore } from "@/app/events/bwai-cloud-2025/lib/firebase";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight, XIcon, Link2Icon, DownloadIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/app/events/bwai-cloud-2025/components/ui/button";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Skeleton } from "@/components/ui/skeleton";
-import { OptimizedImage } from "@/lib/types";
+} from "@/app/events/bwai-cloud-2025/components/ui/accordion";
+import { Skeleton } from "@/app/events/bwai-cloud-2025/components/ui/skeleton";
+import { OptimizedImage } from "@/app/events/bwai-cloud-2025/lib/types";
 import { FacebookIcon, LinkedinIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -316,7 +316,7 @@ export default function Gallery({ initialName }: GalleryProps) {
                     !initialName
                       ? handleClose
                       : () => {
-                          router.push("/gallery");
+                          router.push("/events/bwai-cloud-2025/gallery");
                         }
                   }
                 >
@@ -356,7 +356,7 @@ export default function Gallery({ initialName }: GalleryProps) {
                   className="space-y-6"
                 >
                   <Image
-                    src="/gdg_cloud_hanoi.png"
+                    src="/bwai-cloud-2025/gdg_cloud_hanoi.png"
                     alt="GDG Cloud Hanoi"
                     width={200}
                     height={200}
@@ -382,7 +382,7 @@ export default function Gallery({ initialName }: GalleryProps) {
                     <Button variant="outline" size="sm" asChild>
                       <a
                         href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                          `${process.env.NEXT_PUBLIC_SITE_URL}gallery/${selectedImage.optimizedName}`
+                          `${process.env.NEXT_PUBLIC_SITE_URL}events/bwai-cloud-2025/gallery/${selectedImage.optimizedName}`
                         )}`}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -394,7 +394,7 @@ export default function Gallery({ initialName }: GalleryProps) {
                     <Button variant="outline" size="sm" asChild>
                       <a
                         href={`https://www.linkedin.com/shareArticle?url=${encodeURIComponent(
-                          `${process.env.NEXT_PUBLIC_SITE_URL}gallery/${selectedImage.optimizedName}`
+                          `${process.env.NEXT_PUBLIC_SITE_URL}events/bwai-cloud-2025/gallery/${selectedImage.optimizedName}`
                         )}`}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -405,7 +405,7 @@ export default function Gallery({ initialName }: GalleryProps) {
                     <Button variant="outline" size="sm" asChild>
                       <a
                         href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
-                          `${process.env.NEXT_PUBLIC_SITE_URL}gallery/${selectedImage.optimizedName}`
+                          `${process.env.NEXT_PUBLIC_SITE_URL}events/bwai-cloud-2025/gallery/${selectedImage.optimizedName}`
                         )}&text=${encodeURIComponent(
                           selectedImage.ai_description ||
                             selectedImage.originalName
@@ -419,7 +419,7 @@ export default function Gallery({ initialName }: GalleryProps) {
                     <Button
                       onClick={() => {
                         navigator.clipboard.writeText(
-                          `${process.env.NEXT_PUBLIC_SITE_URL}gallery/${selectedImage.optimizedName}`
+                          `${process.env.NEXT_PUBLIC_SITE_URL}events/bwai-cloud-2025/gallery/${selectedImage.optimizedName}`
                         );
                         toast("URL copied!");
                       }}

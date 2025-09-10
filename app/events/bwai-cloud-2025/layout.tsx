@@ -1,41 +1,41 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Toaster } from "@/components/ui/sonner";
-import { ScrollProvider } from "@/components/ScrollContext";
+import { Toaster } from "@/app/events/bwai-cloud-2025/components/ui/sonner";
+import { ScrollProvider } from "@/app/events/bwai-cloud-2025/components/ScrollContext";
 import localFont from "next/font/local";
-import AppCheckProvider from "@/components/AppCheckProvider";
+import AppCheckProvider from "@/app/events/bwai-cloud-2025/components/AppCheckProvider";
 import { NextIntlClientProvider } from "next-intl";
-import { BrowserRequired } from "@/components/BrowserRequired";
+import { BrowserRequired } from "@/app/events/bwai-cloud-2025/components/BrowserRequired";
 
 const googleSans = localFont({
   src: [
     {
-      path: "../public/fonts/GoogleSans-Regular.ttf",
+      path: "../../../public/bwai-cloud-2025/fonts/GoogleSans-Regular.ttf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../public/fonts/GoogleSans-Medium.ttf",
+      path: "../../../public/bwai-cloud-2025/fonts/GoogleSans-Medium.ttf",
       weight: "500",
       style: "normal",
     },
     {
-      path: "../public/fonts/GoogleSans-Bold.ttf",
+      path: "../../../public/bwai-cloud-2025/fonts/GoogleSans-Bold.ttf",
       weight: "700",
       style: "normal",
     },
     {
-      path: "../public/fonts/GoogleSans-Italic.ttf",
+      path: "../../../public/bwai-cloud-2025/fonts/GoogleSans-Italic.ttf",
       weight: "400",
       style: "italic",
     },
     {
-      path: "../public/fonts/GoogleSans-MediumItalic.ttf",
+      path: "../../../public/bwai-cloud-2025/fonts/GoogleSans-MediumItalic.ttf",
       weight: "500",
       style: "italic",
     },
     {
-      path: "../public/fonts/GoogleSans-BoldItalic.ttf",
+      path: "../../../public/bwai-cloud-2025/fonts/GoogleSans-BoldItalic.ttf",
       weight: "700",
       style: "italic",
     },

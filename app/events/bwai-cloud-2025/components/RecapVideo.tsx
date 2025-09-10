@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/app/events/bwai-cloud-2025/lib/utils";
 import { useEffect, useRef, useState } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
@@ -197,7 +197,7 @@ export default function RecapVideo() {
   return (
     <VideoPlayer
       src="https://storage.googleapis.com/gdg-cloud-hanoi/videos/recap/manifest.mpd"
-      thumbnailSrc="/preview.jpg"
+      thumbnailSrc="/bwai-cloud-2025/preview.jpg"
       thumbnailAlt="Recap video"
       className="max-w-screen-lg w-full shadow-lg"
       playerClassName="border border-transparent rounded-lg"

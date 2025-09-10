@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import Footer from "@/components/Footer";
-import Gallery from "@/components/Gallery";
+import Footer from "@/app/events/bwai-cloud-2025/components/Footer";
+import Gallery from "@/app/events/bwai-cloud-2025/components/Gallery";
 import Link from "next/link";
 import { ChevronLeftIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { LanguageSwitcher } from "@/app/events/bwai-cloud-2025/components/LanguageSwitcher";
 
 export default function Page() {
   const t = useTranslations();
@@ -16,7 +16,7 @@ export default function Page() {
     <div className="flex flex-col">
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur shadow-md">
         <nav className="container max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link className="flex gap-2 font-semibold" href="/">
+          <Link className="flex gap-2 font-semibold" href="/events/bwai-cloud-2025">
             <ChevronLeftIcon />
             {t("home")}
           </Link>
@@ -28,7 +28,7 @@ export default function Page() {
               className="flex items-center"
             >
               <Image
-                src="/gdg_cloud_hanoi.png"
+                src="/bwai-cloud-2025/gdg_cloud_hanoi.png"
                 alt="Logo"
                 width={192}
                 height={60}
