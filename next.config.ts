@@ -1,23 +1,25 @@
 import type { NextConfig } from "next";
-import createNextIntlPlugin from "next-intl/plugin";
+import createMDX from "@next/mdx";
+import createNextIntlPlugin from 'next-intl/plugin';
 
 const nextConfig: NextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   images: {
     remotePatterns: [
       {
-        hostname: "storage.googleapis.com",
         protocol: "https",
-      },
-      {
-        hostname: "lh3.googleusercontent.com",
-        protocol: "https",
+        hostname: "firebasestorage.googleapis.com",
+        pathname: "/v0/b/gdg-cloud-hanoi.firebasestorage.app/o/**",
       },
     ],
   },
+  allowedDevOrigins: ['192.168.2.48'],
 };
 
-const withNextIntl = createNextIntlPlugin("./app/events/bwai-cloud-2025/i18n/request.ts");
-export default withNextIntl(nextConfig);
+const withNextIntl = createNextIntlPlugin();
+
+// Plugin names as strings: Turbopack can't take plugin functions.
+const withMDX = createMDX({
+  options: { remarkPlugins: ["remark-gfm"] },
+});
+
+export default withNextIntl(withMDX(nextConfig));
