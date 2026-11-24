@@ -1,0 +1,82 @@
+# Settings for Backend (on Cloud Run).
+# See https://firebase.google.com/docs/app-hosting/configure#cloud-run
+runConfig:
+  minInstances: 0
+  maxInstances: 16
+  concurrency: 80
+  cpu: 2
+  memoryMiB: 2048
+  # maxInstances: 100
+  # concurrency: 80
+  # cpu: 1
+  # memoryMiB: 512
+  
+# Environment variables and secrets.
+# See https://firebase.google.com/docs/app-hosting/configure#user-defined-environment
+# Create secrets with `firebase apphosting:secrets:set <secretName>`.
+# See https://firebase.google.com/docs/app-hosting/configure#secret-parameters
+env:
+  - variable: NEXT_PUBLIC_FIREBASE_API_KEY
+    value: "AIzaSyC2b57FlruYwm_9TOvMwm7ZJ_rnsed8ymo"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+    value: "gdg-cloud-hanoi.firebaseapp.com"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+    value: "gdg-cloud-hanoi"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+    value: "gdg-cloud-hanoi.firebasestorage.app"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+    value: "292394080426"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_FIREBASE_APP_ID
+    value: "1:292394080426:web:27c61cce9e5ac9f88b58d3"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+    value: "G-CZE52Q96YL"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: DEVFEST_TICKET_PUBLIC_KEY
+    value: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFqXY5Ot8rgcL++ztqEqMtXQfVAwFIEKFMllS911ysW+ DevFest Cloud 2026"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: DEVFEST_TICKET_PRIVATE_KEY
+    secret: DEVFEST_TICKET_PRIVATE_KEY@1
+    availability:
+      - RUNTIME
+  - variable: SMTP_EMAIL
+    value: "GDG Cloud Hanoi <events@gdgcloudhanoi.dev>"
+    availability:
+      - RUNTIME
+  - variable: SMTP_ENDPOINT
+    value: 4b7zy7uivpk2.uemp.mail-manager-smtp.amazonaws.com
+    availability:
+      - RUNTIME
+  - variable: SMTP_PORT
+    value: "587"
+    availability:
+      - RUNTIME
+  - variable: SMTP_USERNAME
+    secret: SMTP_USERNAME@2
+    availability:
+      - RUNTIME
+  - variable: SMTP_PASSWORD
+    secret: SMTP_PASSWORD@2
+    availability:
+      - RUNTIME

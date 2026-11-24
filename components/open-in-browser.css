@@ -1,0 +1,36 @@
+/*
+ * Lets <OpenInBrowser> render with the site look inside root layouts that use
+ * their own theme (old event pages). Import it after Tailwind there; the site
+ * layout doesn't need it. Theme variables are scoped to the dialog so the
+ * event page itself is untouched.
+ */
+@source "./open-in-browser.tsx";
+@source "./ui/dialog.tsx";
+@source "./ui/button.tsx";
+
+@theme {
+  --color-ash: #9aa0a6;
+  --color-surface-card: #f1f3f4;
+  --color-brand-hover: #1967d2;
+  --color-brand-active: #185abc;
+  --font-heading: inherit;
+}
+
+[data-slot="dialog-overlay"],
+[data-slot="dialog-content"] {
+  --background: #ffffff;
+  --foreground: #202124;
+  --popover: #ffffff;
+  --popover-foreground: #202124;
+  --primary: #1a73e8;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f3f4;
+  --secondary-foreground: #202124;
+  --muted: #f8f9fa;
+  --muted-foreground: #5f6368;
+  --border: #dadce0;
+  --input: #dadce0;
+  --ring: #1a73e8;
+  --destructive: #d93025;
+  --radius: 4px;
+}
