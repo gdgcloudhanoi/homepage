@@ -269,11 +269,23 @@ function Registered({
 }
 
 export function RegisterLink({ className }: { className: string }) {
+  // Registration is closed: a static, muted label instead of the link.
   return (
-    <a href="#register" className={className} onClick={() => track("register_click")}>
-      Đăng ký ngay
-    </a>
+    <span
+      aria-disabled
+      className={cn(
+        className,
+        "cursor-default bg-surface-card text-mute hover:bg-surface-card active:bg-surface-card",
+      )}
+    >
+      Đã đóng đăng ký
+    </span>
   );
+  // return (
+  //   <a href="#register" className={className} onClick={() => track("register_click")}>
+  //     Đăng ký ngay
+  //   </a>
+  // );
 }
 
 export function RegistrationForm() {
@@ -306,15 +318,20 @@ export function RegistrationForm() {
     return <Registered {...mutation.data} />;
   }
 
+  // Registration is closed: the form stays visible but `inert` blocks all
+  // interaction, and submitting is disabled.
   return (
     <form
       ref={formRef}
       noValidate
+      inert
       onSubmit={(event) => {
         event.preventDefault();
-        void form.handleSubmit();
+        // void form.handleSubmit();
       }}
-      className="flex flex-col gap-6"
+      // Dim the fields but not the button, which carries the closed message.
+      className="flex flex-col gap-6 [&>:not(button)]:opacity-50"
+      // className="flex flex-col gap-6"
     >
       <div className="grid gap-6 sm:grid-cols-2">
         <form.AppField name="name">
@@ -566,10 +583,13 @@ export function RegistrationForm() {
 
       <button
         type="submit"
-        disabled={mutation.isPending}
-        className="h-9 self-start rounded-lg bg-brand px-5 py-1 text-base leading-8 font-medium text-canvas outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 active:bg-brand-active disabled:bg-surface-card disabled:text-ash"
+        disabled
+        // disabled={mutation.isPending}
+        className="h-9 self-start rounded-lg bg-surface-card px-5 py-1 text-base leading-8 font-medium text-mute"
+        // className="h-9 self-start rounded-lg bg-brand px-5 py-1 text-base leading-8 font-medium text-canvas outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 active:bg-brand-active disabled:bg-surface-card disabled:text-ash"
       >
-        {mutation.isPending ? "Đang đăng ký…" : "Đăng ký"}
+        Đã đóng đăng ký
+        {/* {mutation.isPending ? "Đang đăng ký…" : "Đăng ký"} */}
       </button>
       {(mutation.isError || mutation.data?.status === "duplicate") && (
         <ErrorText
