@@ -1,0 +1,88 @@
+export const metadata = {
+  title:
+    "Xây dựng ứng dụng tìm kiếm ảnh chụp bằng khuôn mặt với Mediapipe và Firebase",
+  description:
+    "Phát hiện khuôn mặt bằng MediaPipe BlazeFace, tạo embedding 512 chiều bằng MobileFaceNet, rồi tìm kiếm bằng Firestore.",
+  author: "Thái Sơn",
+  socials: {
+    github: "https://github.com/thaisonzdx",
+    linkedin: "https://www.linkedin.com/in/thaisonzdx",
+    facebook: "https://www.facebook.com/thaisonzdx",
+    instagram: "https://www.instagram.com/thaisonzdx",
+    x: "https://x.com/thaisonzdx",
+  },
+  publishedAt: "2026-10-31",
+  lang: "vi",
+  translation: "building-a-face-search-photo-app-with-mediapipe-and-firebase",
+  photos: true,
+  image:
+    "https://firebasestorage.googleapis.com/v0/b/gdg-cloud-hanoi.firebasestorage.app/o/df26%2Fopengraph-image.jpg?alt=media&token=fb88530e-7853-4dde-95cd-a448380498b9",
+};
+
+Sau mỗi sự kiện tại GDG Cloud Hanoi, album ảnh của chúng mình lại có thêm hàng nghìn tấm ảnh. Câu hỏi nhận được nhiều nhất luôn là: _"Ảnh của mình ở đâu?"_. Lướt hết album để tìm vài tấm có mặt mình thì quá mệt, nên mình làm tính năng **tìm ảnh bằng khuôn mặt**: bạn gửi một tấm selfie, hệ thống trả về những bức ảnh có bạn.
+
+## Tổng quan
+
+- **Lập chỉ mục**: mỗi ảnh tải lên được tách thành các khuôn mặt, mỗi khuôn mặt thành một vector 512 chiều (**embedding**) lưu trong Firestore.
+- **Tìm kiếm**: tạo embedding cho khuôn mặt trong selfie, rồi hỏi Firestore những embedding nào gần nhất.
+
+## Nhận diện khuôn mặt và tạo embedding
+
+Ở bước tìm kiếm, mình dùng [BlazeFace](https://arxiv.org/abs/1907.05047) bản short-range qua [MediaPipe Face Detector](https://ai.google.dev/edge/mediapipe/solutions/vision/face_detector) để nhận diện khuôn mặt trong selfie. Model chỉ khoảng 0,2 MB nên tải rất nhanh và chạy ngay trên máy người dùng.
+
+Khuôn mặt nhận diện được sau đó được đưa qua một model kiến trúc **MobileFaceNet** để tạo embedding: một vector 512 chiều, được **chuẩn hoá L2** về độ dài 1.
+
+Chi tiết nhỏ này quyết định cách truy vấn Firestore: với hai vector độ dài 1, **tích vô hướng chính là cosine similarity**, nên mình dùng phép đo `DOT_PRODUCT`, rẻ hơn `COSINE` mà cho cùng thứ tự kết quả.
+
+## Lưu embedding vào Firestore
+
+Mỗi khuôn mặt là một document riêng trong collection `faces`, với embedding lưu bằng `FieldValue.vector()`, ghi cùng transaction với document của ảnh. Không nhúng vào document ảnh vì `findNearest` trả về document, mỗi khuôn mặt cần được so sánh riêng, và document ảnh được đọc rất nhiều khi xem album nên kéo theo hàng chục vector mỗi lần đọc thì lãng phí.
+
+Ngoài `photo` và `embedding`, có hai field đáng chú ý:
+
+- `model`: vector của hai model khác nhau không so sánh được với nhau, nên cần biết khuôn mặt nào phải tính lại khi đổi model.
+- `createdAt`: mọi khuôn mặt của cùng một ảnh có **cùng một** `createdAt`. Phần sau sẽ dùng tính chất này.
+
+Firestore chỉ chạy `findNearest` khi có vector index khớp với truy vấn. Index của mình trong `firestore.indexes.json`:
+
+```json
+{
+  "collectionGroup": "faces",
+  "queryScope": "COLLECTION",
+  "fields": [
+    { "fieldPath": "createdAt", "order": "ASCENDING" },
+    {
+      "fieldPath": "embedding",
+      "vectorConfig": { "dimension": 512, "flat": {} }
+    }
+  ]
+}
+```
+
+`dimension` phải khớp chính xác với độ dài vector. Field `createdAt` đứng trước vector để lọc trước theo thời gian; đổi lại, **mọi** truy vấn vector đều phải lọc trên `createdAt`, kể cả khi không cần (khi đó lọc `createdAt >= 0`).
+
+## Truy vấn với `findNearest`
+
+Truy vấn `findNearest` trên `faces` với `DOT_PRODUCT` và `distanceThreshold`. Với `DOT_PRODUCT`, Firestore chỉ giữ những kết quả có tích vô hướng **lớn hơn hoặc bằng** ngưỡng, nên không phải tự lọc. Truy vấn chỉ `select("photo")`, nên vector và toạ độ khuôn mặt không bao giờ rời khỏi server.
+
+Ngưỡng là đánh đổi giữa _bỏ sót_ và _nhận nhầm_. Mình chọn mặc định **0,35** và cho phép ban tổ chức chỉnh trong khoảng 0,2 đến 0,8 ngay trên trang quản trị, để thử trên ảnh thật mà không cần deploy lại.
+
+## Vượt giới hạn 1000 kết quả
+
+`findNearest` trả về tối đa **1000** document và không có phân trang. Người xuất hiện nhiều như ban tổ chức dễ vượt con số này.
+
+Mình chia trục `createdAt` thành các cửa sổ thời gian và quét từ mới đến cũ. Cửa sổ nào đầy thì chia đôi rồi quét lại, cửa sổ còn thưa thì lần sau mở rộng gấp đôi. Vì mọi khuôn mặt của một ảnh có chung `createdAt`, mỗi ảnh nằm trọn trong đúng một cửa sổ, không bị đếm hai lần hay bị cắt đôi. Trường hợp phổ biến chỉ tốn **một truy vấn**, và trang kết quả sau quét tiếp từ chỗ trang trước dừng lại.
+
+## Mở rộng truy vấn
+
+Selfie thường chụp chính diện, đủ sáng; ảnh sự kiện thì nghiêng mặt, đèn sân khấu, chuyển động. Một vector selfie đơn lẻ sẽ bỏ sót nhiều ảnh như vậy.
+
+Mình tìm trước tối đa 5 khuôn mặt _rất_ giống selfie (ngưỡng 0,5, mỗi ảnh một khuôn mặt) rồi trộn vào truy vấn: selfie giữ một nửa trọng số, trung bình các khuôn mặt này giữ nửa còn lại, sau đó chuẩn hoá lại về độ dài 1. Các khuôn mặt này đến từ chính album nên mang theo đúng góc mặt và ánh sáng của sự kiện, còn selfie giữ một nửa trọng số để truy vấn không bị kéo trôi sang người khác.
+
+## Tổng kết
+
+- **Chuẩn hoá vector từ đầu** cho phép dùng `DOT_PRODUCT` và một ngưỡng dễ hiểu.
+- **Firestore là đủ** cho quy mô album sự kiện: không thêm hệ thống, không đồng bộ dữ liệu sang nơi khác, và vector nằm ngay cạnh dữ liệu ảnh.
+- **Giới hạn 1000 kết quả không phải ngõ cụt** nếu có một field để chia cửa sổ và thiết kế index từ đầu cho nó.
+
+Bạn có thể thử ngay trên [album ảnh của GDG Cloud Hanoi](/photos). Embedding của selfie chỉ dùng để tìm kiếm và không được lưu lại.
