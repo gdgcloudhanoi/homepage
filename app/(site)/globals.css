@@ -2,8 +2,9 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @plugin "@tailwindcss/typography";
-/* app/test* is gitignored, which Tailwind skips by default. */
-@source "./test5";
+/* Old events have their own root layouts and stylesheets. */
+@source not "../(devfest-cloud-2024)";
+@source not "../(bwai-cloud-2025)";
 
 @custom-variant dark (&:is(.dark *));
 

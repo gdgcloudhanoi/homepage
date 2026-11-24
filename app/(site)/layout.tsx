@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Analytics } from "@/components/analytics";
+import { OpenInBrowser } from "@/components/open-in-browser";
 import { Google_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -64,7 +65,9 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-full flex-col">
         <NextIntlClientProvider>
-          <TooltipProvider>{children}</TooltipProvider>
+          <TooltipProvider>
+            <OpenInBrowser>{children}</OpenInBrowser>
+          </TooltipProvider>
         </NextIntlClientProvider>
         <Analytics />
       </body>
