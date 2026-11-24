@@ -228,6 +228,8 @@ export function PhotoBrowser({
     return null;
   }, [open, results, found, foundIndex, all, allIndex, next, total, photo, loadMore, loadMoreResults]);
 
+  /* eslint-disable react-hooks/refs -- false positive: `viewing.more` holds the
+     load callbacks, which read `loading.current` only when called from an effect. */
   const tile = viewing && viewing.list[viewing.index];
   const group = useMemo(() => (tile?.group ? [tile, ...tile.group] : null), [tile]);
   const shown = (open && group?.find((member) => member.id === open.id)) ?? tile;
@@ -331,4 +333,5 @@ export function PhotoBrowser({
       )}
     </>
   );
+  /* eslint-enable react-hooks/refs */
 }
