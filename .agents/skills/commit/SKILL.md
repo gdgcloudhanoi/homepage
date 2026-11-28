@@ -59,12 +59,14 @@ chore/deps
 Switch from `main` while keeping the working tree. This works because `dev` and `main` have the same tree.
 
 ```sh
+CLAUDE=(-c user.name=Claude -c user.email=noreply@anthropic.com)
 git switch -c feat/photo-search dev
 git add -- path/a path/b
-git commit -m "feat(photos): add selfie face search page" \
-  --trailer "Co-authored-by: Claude <noreply@anthropic.com>"
+git "${CLAUDE[@]}" commit -m "feat(photos): add selfie face search page"
 # ...more commits on the same branch
 ```
+
+Branch commits are Claude's own work, so Claude is both author and committer (see [Authorship](#authorship)).
 
 - To stage only some hunks of a file, write the hunks to a patch and run `git apply --cached patch.diff`. `git add -p` is interactive and will hang.
 - If `git switch` refuses because of conflicts, run `git stash push -u -m wip`, switch, then `git stash pop`. Never discard changes to make it work.
@@ -73,11 +75,13 @@ git commit -m "feat(photos): add selfie face search page" \
 ### 4. Merge and return to main
 
 ```sh
-git switch dev  && git merge --no-ff feat/photo-search -m "Merge branch 'feat/photo-search' into dev: selfie face search" \
-  -m "Co-authored-by: Claude <noreply@anthropic.com>"
+git switch dev  && git "${CLAUDE[@]}" merge --no-ff feat/photo-search \
+  -m "Merge branch 'feat/photo-search' into dev: selfie face search"
 git switch main && git merge --no-ff dev -m "Merge branch 'dev': selfie face search" \
   -m "Co-authored-by: Claude <noreply@anthropic.com>"
 ```
+
+The merge into `dev` is Claude's. The merge into `main` is the release, so it is made with the user's own git identity and credits Claude with the trailer.
 
 Repeat steps 3 and 4 for the next branch, starting again from `dev`. Finish on `main`. Run `git status --short` and confirm that only intentionally skipped files remain.
 
@@ -92,8 +96,8 @@ git switch -c hotfix/x main
 # commit
 git switch main && git merge --no-ff hotfix/x -m "Merge branch 'hotfix/x': broken deploy workflow" \
   -m "Co-authored-by: Claude <noreply@anthropic.com>"
-git switch dev  && git merge --no-ff hotfix/x -m "Merge branch 'hotfix/x' into dev: broken deploy workflow" \
-  -m "Co-authored-by: Claude <noreply@anthropic.com>"
+git switch dev  && git "${CLAUDE[@]}" merge --no-ff hotfix/x \
+  -m "Merge branch 'hotfix/x' into dev: broken deploy workflow"
 git switch main
 ```
 
@@ -118,16 +122,29 @@ git tag -a 26.12.06 -m "DevFest Cloud Hanoi 2026"
 - Summary: imperative, lowercase start, no trailing period, 72 characters or fewer. Say what changed for the user or the code, not "update file".
 - Add a body only when the reason isn't obvious. Wrap it at 72 characters and explain why, not how.
 - A little humor is fine now and then, e.g. `fix(ci): restore build-push-action ref (oops)` or `ci: registry from secrets, final answer`. Keep it to the odd commit and never let it make the summary unclear.
-- End every commit you create, merge commits included, with this trailer, after a blank line. For normal commits use `git commit --trailer`; `git merge` has no `--trailer`, so pass the trailer as a second `-m`, which git adds as its own paragraph:
+- Every merge commit has a summary of what the branch brings after a colon. A bare `Merge branch 'dev'` or `Merge branch 'feat/x' into dev` is never acceptable, so always pass `-m` and never let git write the default message:
+  - `Merge branch '<branch>' into dev: <summary>`
+  - `Merge branch 'dev': <summary>`
+  - `Merge branch 'hotfix/<name>': <summary>`
 
-  ```
-  Co-authored-by: Claude <noreply@anthropic.com>
-  ```
-
-- Merge commits keep git's default wording and add a brief summary of what the branch brings after a colon: `Merge branch '<branch>' into dev: <summary>`, `Merge branch 'dev': <summary>`. The summary is a short lowercase phrase with no trailing period, and the whole subject stays at 72 characters or fewer. When `dev` carries several branches to `main`, summarize them together (e.g. `portfolio sections, firebase hosting`). No body on merge commits, only the trailer.
+  The summary is a short lowercase phrase with no trailing period, and the whole subject stays at 72 characters or fewer. When `dev` carries several branches to `main`, summarize them together (e.g. `portfolio sections, firebase hosting`). No body on merge commits.
 
 Good: `feat(gallery): add download button`, `fix(og): load font from absolute URL`, `perf(hero): serve featured images from Cloud Storage`.
 Bad: `update`, `fix bugs`, `update ui`, `test workflow`, `WIP`.
+
+## Authorship
+
+The user and Claude share the work this way:
+
+| Commit | Author and committer | Trailer |
+|---|---|---|
+| Commits on work branches (`feat/*`, `fix/*`, `chore/*`, `hotfix/*`, ...) | `Claude <noreply@anthropic.com>` | none |
+| Merges into `dev` | `Claude <noreply@anthropic.com>` | none |
+| Merges into `main` (from `dev` or `hotfix/*`) | the user's own git identity | `Co-authored-by: Claude <noreply@anthropic.com>` |
+
+- For Claude's commits, prefix the command with `git -c user.name=Claude -c user.email=noreply@anthropic.com`. That sets both author and committer. Never change the repo's or the user's git config.
+- For merges into `main`, use plain `git merge` so the user's identity applies. `git merge` has no `--trailer`, so pass the trailer as a second `-m`, which git adds as its own paragraph.
+- Release tags are created with the user's identity.
 
 ## Safety rules
 
